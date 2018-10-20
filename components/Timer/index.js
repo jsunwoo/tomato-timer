@@ -1,15 +1,18 @@
 import React, { Component } from "react";
-import { View, Text, StyleSheet } from "react-native";
+import { View, Text, StyleSheet, StatusBar } from "react-native";
+import Button from "../Button";
 
 class Timer extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <View>
-          <Text>25:00</Text>
+        <StatusBar barStyle={"light-content"} />
+        <View style={styles.upper}>
+          <Text style={styles.time}>25:00</Text>
         </View>
-        <View>
-          <Text>BUTTONS HERE</Text>
+        <View style={styles.lower}>
+          <Button iconName="play-circle" />
+          <Button iconName="stop-circle" />
         </View>
       </View>
     );
@@ -17,9 +20,25 @@ class Timer extends Component {
 }
 
 const styles = StyleSheet.create({
-  container: {},
-  upper: {},
-  lower: {}
+  container: {
+    flex: 1,
+    backgroundColor: "#CE0824"
+  },
+  upper: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center"
+  },
+  lower: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center"
+  },
+  time: {
+    fontSize: 120,
+    fontWeight: "normal",
+    color: "white"
+  }
 });
 
 export default Timer;
