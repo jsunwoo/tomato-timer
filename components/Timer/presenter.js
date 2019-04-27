@@ -11,7 +11,7 @@ class Timer extends Component {
       startTimer,
       restartTimer
     } = this.props;
-    console.log("Timer: ", this.props);
+    console.log("this.props: ", this.props);
     return (
       <View style={styles.container}>
         <StatusBar barStyle={"light-content"} />
@@ -19,6 +19,7 @@ class Timer extends Component {
           <Text style={styles.time}>25:00</Text>
         </View>
         <View style={styles.lower}>
+        // 조건검사는 ? 를 쓸수도 잇고 아래의 방법으로도 할수있다.
           {!isPlaying ? (
             <Button iconName="play-circle" onPressed={() => startTimer()} />
           ) : null}

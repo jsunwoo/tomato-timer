@@ -7,7 +7,8 @@ import { Provider } from "react-redux";
 
 let store = createStore(reducer);
 
-console.log(store.getState());
+console.log("store: ", store);
+console.log("store.getState(): ", store.getState());
 
 export default class App extends Component {
   render() {
