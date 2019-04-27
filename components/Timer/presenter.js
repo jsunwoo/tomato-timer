@@ -3,6 +3,11 @@ import { View, Text, StyleSheet, StatusBar } from "react-native";
 import Button from "../Button";
 
 class Timer extends Component {
+  componentWillReceiveProps(nextProps) {
+    const currentProps = this.props;
+    console.log(`currentProps: ${currentProps.isPlaying} and nextProps: ${nextProps.isPlaying}`);
+  }
+
   render() {
     const {
       isPlaying,
@@ -19,7 +24,7 @@ class Timer extends Component {
           <Text style={styles.time}>25:00</Text>
         </View>
         <View style={styles.lower}>
-        // 조건검사는 ? 를 쓸수도 잇고 아래의 방법으로도 할수있다.
+          // 조건검사는 ? 를 쓸수도 잇고 아래의 방법으로도 할수있다.
           {!isPlaying ? (
             <Button iconName="play-circle" onPressed={() => startTimer()} />
           ) : null}
