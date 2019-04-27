@@ -5,7 +5,20 @@ import Button from "../Button";
 class Timer extends Component {
   componentWillReceiveProps(nextProps) {
     const currentProps = this.props;
-    console.log(`currentProps: ${currentProps.isPlaying} and nextProps: ${nextProps.isPlaying}`);
+    // console.log(`currentProps: ${currentProps.isPlaying} and nextProps: ${nextProps.isPlaying}`);
+    if (!currentProps.isPlaying && nextProps.isPlaying) {
+      const timerInterval = setInterval(() => {
+        currentProps.addSecondX();
+      }, 1000);
+      console.log("timerInterval: ", timerInterval);
+      this.setState({
+        timerInterval
+      });
+    }
+    else if (currentProps.isPlaying && !nextProps.isPlaying) {
+      console.log("this.state: ", this.state);
+      clearInterval(this.state.timerInterval);
+    }
   }
 
   render() {
@@ -13,8 +26,9 @@ class Timer extends Component {
       isPlaying,
       elapsedTime,
       timerDuration,
-      startTimer,
-      restartTimer
+      startTimerX,
+      restartTimerX,
+      addSecondX
     } = this.props;
     console.log("this.props: ", this.props);
     return (
@@ -26,10 +40,10 @@ class Timer extends Component {
         <View style={styles.lower}>
           // 조건검사는 ? 를 쓸수도 잇고 아래의 방법으로도 할수있다.
           {!isPlaying ? (
-            <Button iconName="play-circle" onPressed={() => startTimer()} />
+            <Button iconName="play-circle" onPressed={() => startTimerX()} />
           ) : null}
           {isPlaying && (
-            <Button iconName="stop-circle" onPressed={() => restartTimer()} />
+            <Button iconName="stop-circle" onPressed={() => restartTimerX()} />
           )}
         </View>
       </View>
