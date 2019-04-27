@@ -2,6 +2,16 @@ import React, { Component } from "react";
 import { View, Text, StyleSheet, StatusBar } from "react-native";
 import Button from "../Button";
 
+function formatTime(time) {
+  let minutes = Math.floor(time / 60);
+  time -= minutes * 60;
+  // 뒤에 10은 10 진수를 의미
+  let seconds = parseInt(time % 60, 10);
+  return `${minutes < 10 ? `0${minutes}` : minutes}:${
+    seconds < 10 ? `0${seconds}` : seconds
+  }`;
+}
+
 class Timer extends Component {
   componentWillReceiveProps(nextProps) {
     const currentProps = this.props;
@@ -14,8 +24,7 @@ class Timer extends Component {
       this.setState({
         timerInterval
       });
-    }
-    else if (currentProps.isPlaying && !nextProps.isPlaying) {
+    } else if (currentProps.isPlaying && !nextProps.isPlaying) {
       console.log("this.state: ", this.state);
       clearInterval(this.state.timerInterval);
     }
@@ -35,7 +44,9 @@ class Timer extends Component {
       <View style={styles.container}>
         <StatusBar barStyle={"light-content"} />
         <View style={styles.upper}>
-          <Text style={styles.time}>25:00</Text>
+          <Text style={styles.time}>
+            {formatTime(timerDuration - elapsedTime)}
+          </Text>
         </View>
         <View style={styles.lower}>
           // 조건검사는 ? 를 쓸수도 잇고 아래의 방법으로도 할수있다.
